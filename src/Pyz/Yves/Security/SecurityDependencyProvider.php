@@ -7,6 +7,7 @@
 
 namespace Pyz\Yves\Security;
 
+use Pyz\Yves\CustomerPage\Plugin\Security\TwoFactorAuthenticationSecurityPlugin;
 use Spryker\Yves\Security\Plugin\Security\RememberMeSecurityPlugin;
 use Spryker\Yves\Security\SecurityDependencyProvider as SprykerSecurityDependencyProvider;
 use SprykerShop\Yves\AgentPage\Plugin\Security\YvesAgentPageSecurityPlugin;
@@ -30,6 +31,7 @@ class SecurityDependencyProvider extends SprykerSecurityDependencyProvider
             new CustomerRememberMeSecurityPlugin(),
             new YvesAgentPageSecurityPlugin(),
             new YvesCustomerPageSecurityPlugin(),
+            new TwoFactorAuthenticationSecurityPlugin(),
             new ValidateCustomerSessionSecurityPlugin(),
             new SaveCustomerSessionSecurityPlugin(),
             new ValidateAgentSessionSecurityPlugin(),
