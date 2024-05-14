@@ -8,4 +8,21 @@
         </behavior>
     </table>
 
+    <table name="pyz_change_email_request">
+        <column name="id_change_email_request" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_customer" type="INTEGER" required="true"/>
+        <column name="old_email" required="true" size="255" type="VARCHAR" caseInsensitive="true"/>
+        <column name="old_email_token" required="true" size="255" type="VARCHAR" caseInsensitive="true"/>
+        <column name="old_email_confirmed" default="false" type="BOOLEAN"/>
+        <column name="new_email" required="true" size="255" type="VARCHAR" caseInsensitive="true"/>
+        <column name="new_email_token" required="true" size="255" type="VARCHAR" caseInsensitive="true"/>
+        <column name="new_email_confirmed" default="false" type="BOOLEAN"/>
+
+        <behavior name="timestampable"/>
+
+        <foreign-key name="pyz_change_email_request-fk_customer" foreignTable="spy_customer" phpName="Customer" refPhpName="CustomerNote">
+            <reference local="fk_customer" foreign="id_customer"/>
+        </foreign-key>
+    </table>
+
 </database>

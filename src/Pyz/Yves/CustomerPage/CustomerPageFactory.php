@@ -8,6 +8,7 @@
 namespace Pyz\Yves\CustomerPage;
 
 use Generated\Shared\Transfer\CustomerTransfer;
+use Pyz\Client\Customer\CustomerClientInterface;
 use Pyz\Yves\CustomerPage\Authenticator\MultiFactorAuthenticator;
 use Pyz\Yves\CustomerPage\Expander\TwoFactorSecurityBuilderExpander;
 use Spryker\Client\Session\SessionClientInterface;
@@ -68,6 +69,14 @@ class CustomerPageFactory extends SprykerCustomerPageFactory
             $this->getTokenStorage(),
             $this->getRouter()
         );
+    }
+
+    /**
+     * @return \Pyz\Client\Customer\CustomerClientInterface
+     */
+    public function getCustomerClient(): CustomerClientInterface
+    {
+        return $this->getProvidedDependency(CustomerPageDependencyProvider::CLIENT_CUSTOMER);
     }
 
     public function createCustomerAuthenticationSuccessHandler(): CustomerAuthenticationSuccessHandler

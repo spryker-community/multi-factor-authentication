@@ -1,0 +1,33 @@
+{% extends template('page-layout-main') %}
+
+{% block title %}
+    <h3 class="page-info__title">{{ 'Change Email' | trans }}</h3>
+{% endblock %}
+
+{% block content %}
+    <section class="section section--last">
+        <div class="grid">
+            <div class="col col--sm-12 col--lg-6 spacing-x spacing-x--inner spacing-x--big">
+                <ul>
+                    {% if _view.oldMailConfirmed %}
+                        <li style="color:green">Old email confirmed</li>
+                    {% else %}
+                        <li style="color:red">Old email not confirmed yet</li>
+                    {% endif %}
+                    {% if _view.newMailConfirmed %}
+                        <li style="color:green">New email confirmed</li>
+                    {% else %}
+                        <li style="color:red">New email not confirmed yet</li>
+                        <li></li>
+                    {% endif %}
+                    {% if _view.fullyProcessed %}
+                        <li style="color:green">Change request fully processed</li>
+                    {% else %}
+                        <li style="color:red">Change request not fully processed yet</li>
+                        <li></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </section>
+{% endblock %}

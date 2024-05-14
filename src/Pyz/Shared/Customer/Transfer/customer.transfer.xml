@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
+
+    <transfer name="EmailChangeRequest">
+        <property name="customer" type="Customer"/>
+        <property name="newEmail" type="string"/>
+        <property name="oldEmail" type="string"/>
+    </transfer>
+
+    <transfer name="EmailConfirmationRequest">
+        <property name="idCustomer" type="int"/>
+        <property name="confirmationHashOld" type="string"/>
+        <property name="confirmationHashNew" type="string"/>
+    </transfer>
+
+    <transfer name="EmailConfirmationResponse">
+        <property name="oldMailConfirmed" type="bool"/>
+        <property name="newMailConfirmed" type="bool"/>
+        <property name="fullyProcessed" type="bool"/>
+    </transfer>
+
+</transfers>

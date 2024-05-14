@@ -150,6 +150,7 @@ class RouterDependencyProvider extends SprykerRouterDependencyProvider
             new MerchantRelationRequestPageRouteProviderPlugin(),
             new MerchantRelationshipPageRouteProviderPlugin(),
             new MultiFactorAuthenticationRouteProviderPlugin(),
+            new \Pyz\Yves\CustomerPage\Plugin\Router\CustomerPageRouteProviderPlugin(),
         ];
     }
 
