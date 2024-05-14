@@ -25,7 +25,7 @@ class AuthenticationListenerPrototypesServiceLoader extends SprykerAuthenticatio
     {
         $container->set(static::SERVICE_SECURITY_AUTHENTICATION_LISTENER_MULTI_FACTOR_PROTO, $container->protect(function (string $firewallName, array $options) use ($container): callable {
             return function () use ($container, $firewallName, $options): FirewallListenerInterface {
-                $this->securityRouter->addSecurityRoute('mfa');
+                $this->securityRouter->addSecurityRoute('enter-second-factor-check');
 
 //                $this->getDispatcher($container)->addSubscriber(
 //                    new CheckCredentialsListener($container->get(static::SERVICE_SECURITY_HASHER_FACTORY)),

@@ -13,8 +13,8 @@ use Pyz\Yves\CustomerPage\Expander\TwoFactorSecurityBuilderExpander;
 use Spryker\Client\Session\SessionClientInterface;
 use SprykerShop\Shared\CustomerPage\CustomerPageConfig;
 use SprykerShop\Yves\CustomerPage\CustomerPageFactory as SprykerCustomerPageFactory;
-use SprykerShop\Yves\CustomerPage\Expander\SecurityBuilderExpander;
 use SprykerShop\Yves\CustomerPage\Expander\SecurityBuilderExpanderInterface;
+use Pyz\Yves\CustomerPage\Plugin\Provider\CustomerAuthenticationSuccessHandler;
 use SprykerShop\Yves\CustomerPage\Plugin\Security\CustomerPageSecurityPlugin;
 use SprykerShop\Yves\CustomerPage\Security\Customer;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -64,7 +64,14 @@ class CustomerPageFactory extends SprykerCustomerPageFactory
 
     private function createMultiFactorAuthenticator(): MultiFactorAuthenticator
     {
-        return new MultiFactorAuthenticator();
+        return new MultiFactorAuthenticator(
+            $this->getTokenStorage(),
+            $this->getRouter()
+        );
     }
 
+    public function createCustomerAuthenticationSuccessHandler(): CustomerAuthenticationSuccessHandler
+    {
+        return new CustomerAuthenticationSuccessHandler();
+    }
 }

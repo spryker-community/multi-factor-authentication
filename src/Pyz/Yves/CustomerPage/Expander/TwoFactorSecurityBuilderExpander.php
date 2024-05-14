@@ -96,29 +96,13 @@ class TwoFactorSecurityBuilderExpander implements SecurityBuilderExpanderInterfa
             ],
         );
 
-//        $securityBuilder = $this->addAccessRules($securityBuilder);
-//        $securityBuilder = $this->addAccessDeniedHandler($securityBuilder);
-//        $securityBuilder = $this->addInteractiveLoginEventSubscriber($securityBuilder);
         $this->addAuthenticator($container);
 
         return $securityBuilder;
     }
 
-    private function addAccessRules(SecurityBuilderInterface $securityBuilder)
-    {
-        return $securityBuilder->addAccessRules([
-            [
-                $this->customerClient->getCustomerSecuredPattern(),
-                static::ROLE_NAME_USER,
-            ],
-            [
-                $this->customerPageConfig->getAnonymousPattern(),
-                static::ACCESS_MODE_PUBLIC,
-            ],
-        ]);
-    }
 
-    private function addAuthenticator(ContainerInterface $container)
+    private function addAuthenticator(ContainerInterface $container): void
     {
         $container->set(static::MULTI_FACTOR_AUTHENTICATOR, function () {
             return $this->authenticator;

@@ -44,7 +44,7 @@ class ConfirmSecondFactorForm extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->setAction('');
+        $builder->setAction('enter-second-factor-check');
 
         $this
             ->addTokenField($builder);
