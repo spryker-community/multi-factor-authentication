@@ -7,6 +7,7 @@
 
 namespace Pyz\Yves\CustomerPage;
 
+use Pyz\Yves\MultiFactorAuthentication\Plugin\RedirectToOTPPlugin;
 use Spryker\Yves\Kernel\Container;
 use SprykerShop\Yves\AgentPage\Plugin\FixAgentTokenAfterCustomerAuthenticationSuccessPlugin;
 use SprykerShop\Yves\AgentPage\Plugin\Security\UpdateAgentTokenAfterCustomerAuthenticationSuccessPlugin;
@@ -87,6 +88,7 @@ class CustomerPageDependencyProvider extends SprykerShopCustomerPageDependencyPr
     protected function getAfterLoginCustomerRedirectPlugins(): array
     {
         return [
+            new RedirectToOTPPlugin(),
             new BusinessOnBehalfCompanyUserRedirectAfterLoginStrategyPlugin(), #BusinessOnBehalfFeature
             new RedirectUriCustomerRedirectStrategyPlugin(),
         ];

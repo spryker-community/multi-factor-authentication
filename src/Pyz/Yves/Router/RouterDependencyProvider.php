@@ -46,6 +46,7 @@ use SprykerShop\Yves\FileManagerWidget\Plugin\Router\FileManagerWidgetRouteProvi
 use SprykerShop\Yves\HomePage\Plugin\Router\HomePageRouteProviderPlugin;
 use SprykerShop\Yves\MerchantRelationRequestPage\Plugin\Router\MerchantRelationRequestPageRouteProviderPlugin;
 use SprykerShop\Yves\MerchantRelationshipPage\Plugin\Router\MerchantRelationshipPageRouteProviderPlugin;
+use Pyz\Yves\MultiFactorAuthentication\Plugin\Router\MultiFactorAuthenticationRouteProviderPlugin;
 use SprykerShop\Yves\NewsletterPage\Plugin\Router\NewsletterPageRouteProviderPlugin;
 use SprykerShop\Yves\NewsletterWidget\Plugin\Router\NewsletterWidgetRouteProviderPlugin;
 use SprykerShop\Yves\OrderCancelWidget\Plugin\Router\OrderCancelWidgetRouteProviderPlugin;
@@ -148,6 +149,7 @@ class RouterDependencyProvider extends SprykerRouterDependencyProvider
             new ProductConfiguratorGatewayPageRouteProviderPlugin(),
             new MerchantRelationRequestPageRouteProviderPlugin(),
             new MerchantRelationshipPageRouteProviderPlugin(),
+            new MultiFactorAuthenticationRouteProviderPlugin(),
         ];
     }
 
