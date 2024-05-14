@@ -23,11 +23,7 @@
 
 namespace Pyz\Yves\MultiFactorAuthentication\Controller;
 
-use Generated\Shared\Transfer\CustomerTransfer;
 use SprykerShop\Yves\CustomerPage\Controller\AbstractCustomerController;
-use SprykerShop\Yves\CustomerPage\Plugin\Router\CustomerPageRouteProviderPlugin;
-use SprykerShop\Yves\CustomerPage\Plugin\Security\CustomerPageSecurityPlugin;
-use SprykerShop\Yves\CustomerPage\Security\Customer;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -35,7 +31,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class EnterSecondFactorController extends AbstractCustomerController
 {
-    private const SESSION_ONE_TIME_PASS = 'SESSION_ONE_TIME_PASS';
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
@@ -61,52 +56,14 @@ class EnterSecondFactorController extends AbstractCustomerController
             ->getConfirmSecondFactorForm()
             ->handleRequest($request);
 
+        if (!$this->getFactory()->getTokenStorage()->getToken()->hasAttribute('otp')) {
+            $this->getFactory()->getTokenStorage()->getToken()->setAttribute('otp', sha1('123456'));
+        }
+
         if (!$confirmSecondFactorForm->isSubmitted()) {
-            // todo send email
-
-            $this->getFactory()->getSessionClient()->set(self::SESSION_ONE_TIME_PASS, '123456'); // todo add randomization
-
             return [
                 'confirmSecondFactorForm' => $confirmSecondFactorForm->createView(),
             ];
         }
-
-        if ($this->validateSecondFactor($request) === true) {
-            // todo finish login
-            $user = $this->createSecurityUser($this->getLoggedInCustomerTransfer());
-            $this->getFactory()->getTokenStorage()->getToken()->setUser($user);
-
-            return $this->redirectResponseInternal(CustomerPageRouteProviderPlugin::ROUTE_NAME_CUSTOMER_OVERVIEW);
-        } else {
-            // todo logout
-            return $this->redirectResponseInternal(CustomerPageRouteProviderPlugin::ROUTE_NAME_LOGIN);
-        }
-    }
-
-    public function createSecurityUser(CustomerTransfer $customerTransfer)
-    {
-        return new Customer(
-            $customerTransfer,
-            $customerTransfer->getEmail(),
-            $customerTransfer->getPassword(),
-            [CustomerPageSecurityPlugin::ROLE_NAME_USER],
-        );
-    }
-
-    private function validateSecondFactor(Request $request)
-    {
-        $enteredOtpToken = $request->get('confirmSecondFactorForm')['otp-token'];
-
-        $sessionClient = $this->getFactory()->getSessionClient();
-
-        $otp = $sessionClient->get(self::SESSION_ONE_TIME_PASS);
-        // clear data
-        $sessionClient->set(self::SESSION_ONE_TIME_PASS, '');
-
-        if (!empty($otp) && $otp === $enteredOtpToken) {
-            return true;
-        }
-
-        return false;
     }
 }

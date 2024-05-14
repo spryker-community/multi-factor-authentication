@@ -62,7 +62,12 @@ class MultiFactorAuthenticator implements AuthenticatorInterface, Authentication
                     [CustomerPageSecurityPlugin::ROLE_NAME_USER],
                 );
             }),
-            new CustomCredentials(function() {return true;},$data['otp-token']),
+            new CustomCredentials(
+                function(string $otp, Customer $user) use ($token) {
+                    return sha1($otp) === $token->getAttribute('otp');
+                },
+                $data['otp-token']
+            ),
         );
     }
 
