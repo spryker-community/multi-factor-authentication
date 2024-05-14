@@ -87,6 +87,6 @@ class MultiFactorAuthenticator implements AuthenticatorInterface, Authentication
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
-        return null;
+        return new RedirectResponse('/logout');
     }
 }
