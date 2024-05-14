@@ -3,8 +3,9 @@
 namespace Pyz\Yves\Security;
 
 use Pyz\Yves\Security\AuthenticationListener\AuthenticationListener;
-use Spryker\Yves\Security\AuthenticationListener\AuthenticationListenerInterface;
 use Pyz\Yves\Security\Loader\Services\AuthenticationListenerPrototypesServiceLoader;
+use Pyz\Yves\Security\Loader\Services\EntryPointPrototypesServiceLoader;
+use Spryker\Yves\Security\AuthenticationListener\AuthenticationListenerInterface;
 use Spryker\Yves\Security\Loader\Services\ServiceLoaderInterface;
 use Spryker\Yves\Security\SecurityFactory as SprykerSecurityFactory;
 
@@ -24,5 +25,13 @@ class SecurityFactory extends SprykerSecurityFactory
             $this->getSecurityRouter(),
             $this->createAuthenticatorManager(),
         );
+    }
+
+    /**
+     * @return \Spryker\Yves\Security\Loader\Services\ServiceLoaderInterface
+     */
+    public function createEntryPointPrototypesServiceLoader(): ServiceLoaderInterface
+    {
+        return new EntryPointPrototypesServiceLoader();
     }
 }

@@ -88,7 +88,7 @@ class CustomerPageDependencyProvider extends SprykerShopCustomerPageDependencyPr
     protected function getAfterLoginCustomerRedirectPlugins(): array
     {
         return [
-            new RedirectToOTPPlugin(),
+//            new RedirectToOTPPlugin(),
             new BusinessOnBehalfCompanyUserRedirectAfterLoginStrategyPlugin(), #BusinessOnBehalfFeature
             new RedirectUriCustomerRedirectStrategyPlugin(),
         ];
